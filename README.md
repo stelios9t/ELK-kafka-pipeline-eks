@@ -1,12 +1,12 @@
 # Centralized Logging Pipeline with Kafka + ELK on EKS
 
-This project builds a production-style **real-time logging pipeline** using **Apache Kafka**, **Elasticsearch**, **Logstash**, and **Kibana** — deployed on an **EKS Kubernetes cluster** using Terraform and Helm.
+This project builds a production-style **real-time logging pipeline** using **Apache Kafka**, **Elasticsearch**, **Logstash**, and **Kibana** deployed on an **EKS Kubernetes cluster** using Terraform and Helm.
 
-It simulates how real-world applications centralize logs across microservices, stream them through Kafka, and visualize them in Kibana — enabling fast debugging, monitoring, and insight generation.
+It simulates how real-world applications centralize logs across microservices, stream them through Kafka, and visualize them in Kibana enabling fast debugging, monitoring, and insight generation.
 
 ## The Problem
 
-In real-world systems, applications generate tons of logs — web requests, errors, security events, and more.
+In real-world systems, applications generate tons of logs web requests, errors, security events, and more.
 
 - Logs are scattered across multiple containers or servers.
 - Debugging and monitoring becomes painfully slow and error-prone.
@@ -41,7 +41,7 @@ A simple Kubernetes CronJob simulates app logs and streams them to a Kafka topic
 
 ### Kafka with Strimzi
 
-Kafka serves as a **durable, high-speed buffer** so logs aren’t lost — even if Elasticsearch is busy.
+Kafka serves as a **durable, high-speed buffer** so logs aren’t lost even if Elasticsearch is busy.
 
 ### Logstash Pipeline
 
