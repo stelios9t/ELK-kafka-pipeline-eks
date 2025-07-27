@@ -10,14 +10,9 @@ spec:
       template:
         spec:
           containers:
-            - name: kafka-producer
-              image: bitnami/kafka:latest
-              command: ["/bin/bash", "-c"]
+            - name: logger
+              image: busybox
+              command: ["/bin/sh", "-c"]
               args:
-                - |
-                  for i in {1..10}; do
-                    echo "{\"level\": \"INFO\", \"message\": \"Log entry $i\", \"timestamp\": \"$(date --utc +%FT%TZ)\"}" \
-                      | kafka-console-producer.sh --broker-list my-cluster-kafka-bootstrap.kafka:9092 --topic logs-topic;
-                    sleep 1;
-                  done
+                - 'echo ''{"level":"INFO","msg":"Log event from app"}'' | nc kafka-cluster-kafka-bootstrap.kafka 9092'
           restartPolicy: OnFailure
