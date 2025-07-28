@@ -34,5 +34,12 @@ kubectl apply -n logging -f [logstash-configmap.yaml](../kubernetes/logstash-con
 helm upgrade --install logstash elastic/logstash -n logging \
  --set persistence.enabled=false \
  --set service.type=ClusterIP \
- --set-file logstashPipeline=/dev/null \
- --set logstashPipelineConfigMap=logstash-pipeline
+ --set logstashPipelineConfigMap=logstash-pipeline \
+ --set service.ports[0].name=beats \
+ --set service.ports[0].port=5044
+
+## Deploy K8S Resources
+
+kubectl apply -n kafka [kafka-cluster-ephemeral.yaml](../kubernetes/kafka-cluster-ephemeral.yaml)
+kubectl apply -n kafka [kafka-topic.yaml](../kubernetes/kafka-topic.yaml)
+kubectl apply -n kafka -f [log-generator](../kubernetes/log-generator.yaml)
