@@ -9,10 +9,14 @@ spec:
     spec:
       template:
         spec:
-          containers:
-            - name: logger
-              image: busybox
-              command: ["/bin/sh", "-c"]
-              args:
-                - 'echo ''{"level":"INFO","msg":"Log event from app"}'' | nc kafka-cluster-kafka-bootstrap.kafka 9092'
           restartPolicy: OnFailure
+          containers:
+            - name: kcat
+              image: edenhill/kcat:1.7.1
+              command: ["/bin/sh","-c"]
+              args:
+                - |
+                  for i in $(seq 1 50); do
+                    echo "{\"level\":\"INFO\",\"msg\":\"Log event from app #$i\"}" \
+                    | kcat -P -b kafka-cluster-kafka-bootstrap.kafka:9092 -t logs-topic -k app;
+                  done
